@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS application (
     bank VARCHAR(50) NOT NULL,
     opsyears INTEGER NOT NULL CHECK (opsyears > 0),
     ssm BOOLEAN NOT NULL,
-    prevgateway BOOLEAN NOT NULL,
+    prevgateway VARCHAR(50),
     prodtype VARCHAR(255) NOT NULL,
     storetype VARCHAR(255) NOT NULL,
     inventory BOOLEAN NOT NULL,

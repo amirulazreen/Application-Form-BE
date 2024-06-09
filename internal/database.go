@@ -6,7 +6,7 @@ type Form struct {
 	Bank        string `json:"bank" sql:"bank"`
 	OpsYears    int    `json:"opYear" sql:"opsyears"`
 	SSM         bool   `json:"ssm" sql:"ssm"`
-	PrevGateway bool   `json:"paymentgateway" sql:"prevgateway"`
+	PrevGateway string `json:"paymentgateway" sql:"prevgateway"`
 	ProdType    string `json:"prodType" sql:"prodtype"`
 	StoreType   string `json:"storeType" sql:"storetype"`
 	Inventory   bool   `json:"inventory" sql:"inventory"`

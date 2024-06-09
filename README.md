@@ -2,7 +2,7 @@
 <html lang="en">
 <body>
   <h1>Onboarding Application Backend</h1>
-  <p>Onboadring application backend to store form submission in database</p>
+  <p>Onboarding application backend to store form submission into database</p>
 <a href="https://chip.fly.dev/">Onboarding application</a><br>
 <a href="https://github.com/amirulazreen/Application-Form-BE">Backend Repo</a>
 

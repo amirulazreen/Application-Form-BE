@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"log"
-	"os"
 
 	"github.com/amirulazreen/CHIP/internal"
 	"github.com/gin-gonic/gin"

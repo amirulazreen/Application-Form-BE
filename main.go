@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	connect := os.Getenv("PG")
+	connect := "user=postgres.xqrxxtdmtwhykrktnrii password=chipdb123123!! host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres ?sslmode=disable"
 
 	db, err := sql.Open("postgres", connect)
 	if err != nil {

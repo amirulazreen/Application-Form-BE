@@ -3,7 +3,6 @@ package main
 import (
 	"database/sql"
 	"log"
-	"os"
 
 	"github.com/amirulazreen/CHIP/internal"
 	"github.com/gin-gonic/gin"
@@ -11,7 +10,8 @@ import (
 )
 
 func main() {
-	connect := os.Getenv("PG")
+	// connect := os.Getenv("PG")
+	connect := "user=postgres.xqrxxtdmtwhykrktnrii password=chipdb123123!! host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 dbname=postgres"
 
 	db, err := sql.Open("postgres", connect)
 	if err != nil {

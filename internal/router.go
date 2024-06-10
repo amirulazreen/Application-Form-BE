@@ -19,15 +19,29 @@ func PostForm(db *sql.DB) gin.HandlerFunc {
 			return
 		}
 
-		ctx, cancel := context.WithTimeout(c.Request.Context(), 500 *time.Millisecond)
-        defer cancel()
+		ctx, cancel := context.WithTimeout(c.Request.Context(), 500*time.Millisecond)
+		defer cancel()
 
-		stmt := `INSERT INTO application (name, type, bank, opsyears, ssm, prevgateway, prodtype, storetype, inventory, reference, socmedia, litigation, score)
-                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
+		var nameExists bool
+		stmt := `SELECT EXISTS (SELECT 1 FROM application WHERE name = $1)`
+		err := db.QueryRowContext(ctx, stmt, obj.Name).Scan(&nameExists)
+		if err != nil {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database query error"})
+			return
+		}
 
-		if _, err := db.ExecContext(ctx,stmt, obj.Name, obj.Type, obj.Bank, obj.OpsYears, obj.SSM, obj.PrevGateway, obj.ProdType, obj.StoreType, obj.Inventory, obj.Reference, obj.SocMedia, obj.Litigation, obj.Score); err != nil {
-			log.Println(err) 
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		if nameExists {
+			c.JSON(http.StatusConflict, gin.H{"error": "Organization of the same name already exists in the database"})
+			return
+		}
+
+		insertStmt := `INSERT INTO application (name, type, bank, opsyears, ssm, prevgateway, prodtype, storetype, inventory, reference, socmedia, litigation, score)
+                       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`
+		_, err = db.ExecContext(ctx, insertStmt, obj.Name, obj.Type, obj.Bank, obj.OpsYears, obj.SSM, obj.PrevGateway, obj.ProdType, obj.StoreType, obj.Inventory, obj.Reference, obj.SocMedia, obj.Litigation, obj.Score)
+		if err != nil {
+			log.Println(err)
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to insert record"})
 			return
 		}
 

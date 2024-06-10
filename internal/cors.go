@@ -9,8 +9,8 @@ import (
 
 func CorsMiddleware() gin.HandlerFunc {
     handler := cors.New(cors.Options{
-        AllowedOrigins: []string{"*"}, 
-        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}, 
+        AllowedOrigins: []string{"*"},
+        AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
     })
 
     return func(c *gin.Context) {
@@ -23,3 +23,4 @@ func CorsMiddleware() gin.HandlerFunc {
         }
     }
 }
+

@@ -7,7 +7,7 @@ import (
 	"github.com/rs/cors"
 )
 
-func CorsMiddleware() gin.HandlerFunc {
+func CORS() gin.HandlerFunc {
     handler := cors.New(cors.Options{
         AllowedOrigins: []string{"*"},
         AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},

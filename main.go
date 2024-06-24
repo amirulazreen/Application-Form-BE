@@ -12,7 +12,6 @@ import (
 
 func main() {
 	connect := os.Getenv("PG")
-
 	db, err := sql.Open("postgres", connect)
 	if err != nil {
 		log.Fatal(err)
@@ -20,7 +19,7 @@ func main() {
 	defer db.Close()
 
 	r := gin.Default()
-	r.Use(internal.CorsMiddleware())
-	r.POST("/save", internal.PostForm(db))
+	r.Use(internal.CORS())
+	r.POST("/save", internal.PostForm(db, internal.Errors))
 	r.Run(":8080")
 }
